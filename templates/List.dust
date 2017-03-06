@@ -11,7 +11,7 @@
             </div>
             {@sep}<hr>{/sep}
         {/entries}
-    {:entries}
+    {:else}
         Sorry, no entries found!
     {/entries}
 {/content}
