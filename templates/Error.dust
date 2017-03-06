@@ -1,0 +1,6 @@
+{>"Base"/}
+
+{<content}
+    <h1>error!</h1>
+    <h2>{message}</h2>
+{/content}

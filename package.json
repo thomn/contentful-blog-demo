@@ -1,0 +1,32 @@
+{
+  "name": "contentful-blog-demo",
+  "version": "1.0.0",
+  "description": "implements a basic blog using contentful as the backend",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/thomn/contentful-blog-demo.git"
+  },
+  "keywords": [
+    "contentful",
+    "blog",
+    "node.js"
+  ],
+  "author": "Manuel Ernst <manuel.ernst@thomann.de>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/thomn/contentful-blog-demo/issues"
+  },
+  "homepage": "https://github.com/thomn/contentful-blog-demo#readme",
+  "dependencies": {
+    "consolidate": "^0.14.5",
+    "contentful": "^3.8.1",
+    "dustjs-helpers": "^1.7.3",
+    "dustjs-linkedin": "^2.7.5",
+    "express": "^4.15.1",
+    "marked": "^0.3.6"
+  }
+}

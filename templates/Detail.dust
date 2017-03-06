@@ -1,0 +1,17 @@
+{>"Base"/}
+
+{<content}
+    <div class="blogPost">
+        <a href="/">&lt; Back</a><br>
+        <br>
+
+        {#entry}
+            {#tags}{.}{@sep}, {/sep}{/tags}
+            <h1>{title}</h1>
+
+            <img src="{featureImage.url}?w=300">
+
+            {body|s}
+        {/entry}
+    </div>
+{/content}

@@ -1,0 +1,17 @@
+{>"Base"/}
+
+{<content}
+    {?entries}
+        {#entries}
+            <div class="blogEntry">
+                <h3><a href="/post/{slug}">{title}</a></h3>
+                <a href="/post/{slug}"><img src="{featureImage.url}?w=150"></a>
+                <p>{teaserText}</p>
+                <a href="/post/{slug}">more</a>
+            </div>
+            {@sep}<hr>{/sep}
+        {/entries}
+    {:entries}
+        Sorry, no entries found!
+    {/entries}
+{/content}
