@@ -24,22 +24,16 @@ express()
     .get('/page/:page', showList)
     .get('/post/:slug', (req, res, next) => {
         cfClient.getBlogDetail(req.params.slug)
-            .then(result => {
-                res.render('Detail', {entry: result})
-            })
+            .then(result => res.render('Detail', {entry: result}))
             .catch(error => next(error))
     })
-    .use((error, req, res, next) => res.render('Error', {message: error.message + error.stack}))
+    .use((error, req, res, next) => res.render('Error', {message: error.message}))
     .listen(8888)
 
 function showList(req, res, next) {
     let page = parseInt(req.params.page || 0, 10)
 
     cfClient.getListOverview(page)
-        .then(result => {
-            let data = result.length > 0 ? result : null
-
-            res.render('List', {entries: data})
-        })
+        .then(result => res.render('List', {entries: result.length > 0 ? result : null}))
         .catch(error => next(error))
 }
