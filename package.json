@@ -13,7 +13,8 @@
   "keywords": [
     "contentful",
     "blog",
-    "node.js"
+    "cms",
+    "demo"
   ],
   "author": "Manuel Ernst <manuel.ernst@thomann.de>",
   "license": "MIT",
