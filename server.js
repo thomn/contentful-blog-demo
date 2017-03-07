@@ -25,7 +25,7 @@ express()
     .get('/post/:slug', (req, res, next) => {
         cfClient.getBlogDetail(req.params.slug)
             .then(result => res.render('Detail', {entry: result}))
-            .catch(error => next(error))
+            .catch(next)
     })
     .use((error, req, res, next) => res.render('Error', {message: error.message}))
     .listen(8888)
@@ -35,5 +35,5 @@ function showList(req, res, next) {
 
     cfClient.getListOverview(page)
         .then(result => res.render('List', {entries: result.length > 0 ? result : null}))
-        .catch(error => next(error))
+        .catch(next)
 }
