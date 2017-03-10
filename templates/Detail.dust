@@ -6,7 +6,7 @@
         <br>
 
         {#entry}
-            {#tags}{.}{@sep}, {/sep}{/tags}
+            Tags: {#tags}{.}{@sep}, {/sep}{/tags}
             <h1>{title}</h1>
 
             <img src="{featureImage.url}?w=300">
