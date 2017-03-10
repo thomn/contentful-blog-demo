@@ -54,7 +54,7 @@ express()
         client
             .getEntries({content_type: 'blogPost', 'fields.slug': req.params.slug})
             .then(result => {
-                if (result.total === 0) next(new Error(`blogpost "${slug}" not found`))
+                if (result.total === 0)  return next(new Error(`blogpost "${slug}" not found`))
 
                 return parseBlogPost(result.items[0])
             })
