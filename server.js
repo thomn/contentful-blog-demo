@@ -11,12 +11,23 @@ const consolidate = require('consolidate')
 const CONTENTFUL_SPACE_ID = '8xyid523mdgd'
 const CONTENTFUL_ACCESS_TOKEN = '8b21ec77bc02fa235cd3c2b3affa2d7ad2feb5ee92d3c0c951c95b77e8b64949'
 
+//create a instance of the contentful client
 const client = contentful.createClient({space: CONTENTFUL_SPACE_ID, accessToken: CONTENTFUL_ACCESS_TOKEN})
 
+/**
+ * parse a list of blog posts
+ * @param apiResponse
+ * @returns {Array}
+ */
 function parseBlogPostList(apiResponse) {
     return apiResponse.items.map(parseBlogPost)
 }
 
+/**
+ * parse a single blog entry
+ * @param blogPost
+ * @returns {{title: (string), teaserText: (string), featureImage: ({title, url}|{title: string, url: string}), body: (string), tags: [string], slug: (string)}}
+ */
 function parseBlogPost(blogPost) {
     let fields = blogPost.fields
 
@@ -30,10 +41,15 @@ function parseBlogPost(blogPost) {
     }
 }
 
-function parseImage(image) {
+/**
+ * extract the relevant data of an image
+ * @param imageData
+ * @returns {{title: (string), url: (string)}}
+ */
+function parseImage(imageData) {
     return {
-        title: image.fields.title,
-        url: image.fields.file.url
+        title: imageData.fields.title,
+        url: imageData.fields.file.url
     }
 }
 
@@ -44,6 +60,7 @@ express()
     .use(express.static('static'))
 
     .get('/', (req, res, next) => {
+        // get all blog entries, parse them and render them into the template 'List'
         client
             .getEntries({content_type: 'blogPost'})
             .then(parseBlogPostList)
@@ -51,6 +68,7 @@ express()
             .catch(next)
     })
     .get('/post/:slug', (req, res, next) => {
+        //get a single blogpost identified by ':slug', parse it and render it into the template 'Detail'
         client
             .getEntries({content_type: 'blogPost', 'fields.slug': req.params.slug})
             .then(result => {
@@ -61,5 +79,8 @@ express()
             .then(result => res.render('Detail', {entry: result}))
             .catch(next)
     })
-    .use((error, req, res, next) => res.render('Error', {message: error.message}))
+    .use((error, req, res, next) => {
+        //if something goes wrong this error handler catches the error and prints an error message via the 'Error' template
+        res.render('Error', {message: error.message})
+    })
     .listen(8888)
